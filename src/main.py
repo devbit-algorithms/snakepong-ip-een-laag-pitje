@@ -1,7 +1,11 @@
 # Import the pygame library and initialise the game engine
 import pygame
+
 from paddle import Paddle
 from ball import Ball
+
+from snake import Snake
+
 
 pygame.init()
  
