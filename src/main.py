@@ -1,5 +1,7 @@
 # Import the pygame library and initialise the game engine
 import pygame
+from paddle import Paddle
+
 pygame.init()
  
 # Define some colors
@@ -14,7 +16,11 @@ BLUE = (50, 153, 213)
 size = (800+20, 600+20)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Pong")
- 
+
+paddleA = Paddle(WHITE, 10, 100)
+paddleA.rect.x = 20
+paddleA.rect.y = 200
+
 # The loop will carry on until the user exit the game (e.g. clicks the close button).
 carryOn = True
  
@@ -40,8 +46,8 @@ while carryOn:
 
     pygame.draw.line(screen, BLUE, [0, 0], [820,0], 10)
     pygame.draw.line(screen, BLUE, [0, 0], [0,620], 10)
-    pygame.draw.line(screen, BLUE, [820, 620], [820,0], 10)
-    pygame.draw.line(screen, BLUE, [820, 620], [0,620], 10)
+    pygame.draw.line(screen, BLUE, [0, 617], [820,617], 10)
+    pygame.draw.line(screen, BLUE, [817, 0], [817,620], 10)
     # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()
      
