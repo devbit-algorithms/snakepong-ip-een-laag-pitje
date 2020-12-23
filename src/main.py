@@ -2,6 +2,7 @@
 import pygame
 from paddle import Paddle
 
+
 pygame.init()
  
 # Define some colors
@@ -20,6 +21,7 @@ pygame.display.set_caption("Pong")
 paddleA = Paddle(WHITE, 10, 100)
 paddleA.rect.x = 20
 paddleA.rect.y = 200
+
 
 #This will be a list that will contain all the sprites we intend to use in our game.
 all_sprites_list = pygame.sprite.Group()
