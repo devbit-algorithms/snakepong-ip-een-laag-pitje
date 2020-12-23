@@ -4,7 +4,7 @@ import pygame
 from paddle import Paddle
 from ball import Ball
 
-from snake import Snake
+#from snake import Snake
 
 
 pygame.init()
@@ -81,6 +81,11 @@ while carryOn:
     if ball.rect.y<0:
         ball.velocity[1] = -ball.velocity[1] 
  
+
+    #Detect collisions between the ball and the paddles
+    if pygame.sprite.collide_mask(ball, paddleA):
+      ball.bounce()
+
     # --- Drawing code should go here
     # First, clear the screen to black. 
     
