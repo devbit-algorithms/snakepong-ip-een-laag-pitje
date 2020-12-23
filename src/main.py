@@ -2,6 +2,7 @@
 import pygame
 
 from paddle import Paddle
+from ball import Ball
 
 from snake import Snake
 
@@ -17,7 +18,7 @@ GREEN = (0, 255, 0)
 BLUE = (50, 153, 213)
  
 # Open a new window
-size = (800+20, 600+20)
+size = (700, 500)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Pong")
 
@@ -25,11 +26,16 @@ paddleA = Paddle(WHITE, 10, 100)
 paddleA.rect.x = 20
 paddleA.rect.y = 200
 
+ball = Ball(WHITE, 10, 10)
+ball.rect.x = 345
+ball.rect.y = 195
+
 #This will be a list that will contain all the sprites we intend to use in our game.
 all_sprites_list = pygame.sprite.Group()
 
 # Add thepaddles to the list of sprites
 all_sprites_list.add(paddleA)
+all_sprites_list.add(ball)
 
 # The loop will carry on until the user exit the game (e.g. clicks the close button).
 carryOn = True
@@ -65,6 +71,15 @@ while carryOn:
     # --- Game logic should go here
     all_sprites_list.update()
  
+
+    if ball.rect.x>=690:
+        ball.velocity[0] = -ball.velocity[0]
+    if ball.rect.x<=0:
+        ball.velocity[0] = -ball.velocity[0]
+    if ball.rect.y>490:
+        ball.velocity[1] = -ball.velocity[1]
+    if ball.rect.y<0:
+        ball.velocity[1] = -ball.velocity[1] 
  
     # --- Drawing code should go here
     # First, clear the screen to black. 
@@ -73,10 +88,10 @@ while carryOn:
     screen.fill(BLACK)
 
 
-    pygame.draw.line(screen, BLUE, [0, 0], [820,0], 10)
-    pygame.draw.line(screen, BLUE, [0, 0], [0,620], 10)
-    pygame.draw.line(screen, BLUE, [0, 617], [820,617], 10)
-    pygame.draw.line(screen, BLUE, [817, 0], [817,620], 10)
+    # pygame.draw.line(screen, BLUE, [0, 0], [700,0], 10)
+    # pygame.draw.line(screen, BLUE, [0, 0], [0,500], 10)
+    # pygame.draw.line(screen, BLUE, [0, 617], [820,617], 10)
+    # pygame.draw.line(screen, BLUE, [817, 0], [817,620], 10)
 
     #drawing al the sprites in one go on the screen
     all_sprites_list.draw(screen) 
