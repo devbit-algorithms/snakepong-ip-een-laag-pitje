@@ -13,7 +13,7 @@
 
 Snakepong is een combinatie van 2 klassieke videogames. Deze legendarische games zijn gecombineerd in 1 spel, Snakepong. Het is een multiplayer game waarbij men de ander moet verslaan door een hogere score te halen dan de ander voordat de snake doodgaat door zijn eigen fout.
 
-![demo snakepong](img/demo.png?raw=true "proffessional example")
+![demo snakepong](img/demo.jpg?raw=true "proffessional example")
 
 # installation
 
