@@ -9,18 +9,17 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 
 # Screen size
-height = 600
-width = 600
+height = 500
+width = 700
 
-# Margin between each segment
-segment_margin = 3
+
 
 # Set the width and height of each snake segment
-segment_width = min(height, width) / 40 - segment_margin
-segment_height = min(height, width) / 40 - segment_margin
+segment_width = 10#min(height, width) / 40
+segment_height = 10#min(height, width) / 40
 
 # Set initial speed
-x_change = segment_width + segment_margin
+x_change = segment_width
 y_change = 0
 
 
@@ -32,16 +31,30 @@ class Snake():
         self.segments = []
         self.spriteslist = pygame.sprite.Group()
         for i in range(15):
-            x = (segment_width + segment_margin) * 30 - (segment_width + segment_margin) * i
-            y = (segment_height + segment_margin) * 2
+            x = (segment_width) * 30 - (segment_width) * i
+            y = (segment_height) * 2
             segment = Segment(x, y)
             self.segments.append(segment)
             self.spriteslist.add(segment)
+            self.__x_change = segment_width
+            self.__y_change = 0
+
+    def set_x_change(self, x_change):
+        self.__x_change = x_change 
+
+    def get_x_change(self, x_change):
+        return self.__x_change 
+
+    def set_y_change(self, x_change):
+        self.__y_change = x_change 
+
+    def get_y_change(self, x_change):
+        return self.__y_change 
 
     def move(self):
         # Figure out where new segment will be
-        x = self.segments[0].rect.x + x_change
-        y = self.segments[0].rect.y + y_change
+        x = self.segments[0].rect.x + self.__x_change
+        y = self.segments[0].rect.y + self.__y_change
 
         # Don't move off the screen
         # At the moment a potential move off the screen means nothing happens, but it should end the game
@@ -55,19 +68,11 @@ class Snake():
         # .pop() command removes last item in list
             old_segment = self.segments.pop()
             self.spriteslist.remove(old_segment)
-        else:
-            return
-        self.eat()
 
 
 
 
-    def grow(self):
-        x = self.segments[0].rect.x + x_change
-        y = self.segments[0].rect.y + y_change
-        segment = Segment(x, y)
-        self.segments.insert(len(self.segments), segment)
-        self.spriteslist.add(segment)
+
 
 
 class Segment(pygame.sprite.Sprite):
@@ -87,92 +92,56 @@ class Segment(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
-foodx = random.choice([i for i in range(0, 600, 15)])
-foody = random.choice([i for i in range(0, 600, 15)])
 
-class Food():
-    def __init__(self):
-        self.foodlists = []
-        self.foodlist = pygame.sprite.Group()
+# # Call this function so the Pygame library can initialize itself
+# pygame.init()
 
-        fooditem = Food_item(foodx, foody)
-        self.foodlists.append(fooditem)
-        self.foodlist.add(fooditem)
+# # Create a 600x600 sized screen
+# screen = pygame.display.set_mode([width, height])
 
-    def replenish(self):
+# # Set the title of the window
+# pygame.display.set_caption('Snake Game')
 
-        newfoodx = random.choice([i for i in range(0, 600, 15)])
-        newfoody = random.choice([i for i in range(0, 600, 15)])
-        fooditem = Food_item(newfoodx, newfoody)
-        self.foodlists.append(fooditem)
-        self.foodlist.add(fooditem)
+# # Create an initial snake
+# my_snake = Snake()
 
+# clock = pygame.time.Clock()
+# done = False
 
+# while not done:
+#     for event in pygame.event.get():
+#         if event.type == pygame.QUIT:
+#             done = True
 
-class Food_item(pygame.sprite.Sprite):
-    def __init__(self, fx, fy):
-        # Call the parent's constructor
-        super().__init__()
-        # Set height, width
-        self.image = pygame.Surface([segment_width, segment_height])
-        self.image.fill(RED)
+#         # Set the direction based on the key pressed
+#         # We want the speed to be enough that we move a full
+#         # segment, plus the margin.
+#         if event.type == pygame.KEYDOWN:
+#             if event.key == pygame.K_LEFT:
+#                 x_change = (segment_width) * -1
+#                 y_change = 0
+#             if event.key == pygame.K_RIGHT:
+#                 x_change = (segment_width)
+#                 y_change = 0
+#             if event.key == pygame.K_UP:
+#                 x_change = 0
+#                 y_change = (segment_height) * -1
+#             if event.key == pygame.K_DOWN:
+#                 x_change = 0
+#                 y_change = (segment_height)
 
-        # Set top-left corner of the bounding rectangle to be the passed-in location.
-        self.rect = self.image.get_rect()
-        self.rect.x = fx
-        self.rect.y = fy
+#     # move snake one step
+#     my_snake.move()
+#     # -- Draw everything
+#     # Clear screen
+#     screen.fill(BLACK)
+#     my_snake.spriteslist.draw(screen)
+    
 
+#     # Flip screen
+#     pygame.display.flip()
 
-""" # Call this function so the Pygame library can initialize itself
-pygame.init()
+#     # Pause
+#     clock.tick(10)
 
-# Create a 600x600 sized screen
-screen = pygame.display.set_mode([width, height])
-
-# Set the title of the window
-pygame.display.set_caption('Snake Game')
-
-# Create an initial snake
-my_snake = Snake()
-food = Food()
-
-clock = pygame.time.Clock()
-done = False """
-
-""" while not done:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            done = True
-
-        # Set the direction based on the key pressed
-        # We want the speed to be enough that we move a full
-        # segment, plus the margin.
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
-                x_change = (segment_width + segment_margin) * -1
-                y_change = 0
-            if event.key == pygame.K_RIGHT:
-                x_change = (segment_width + segment_margin)
-                y_change = 0
-            if event.key == pygame.K_UP:
-                x_change = 0
-                y_change = (segment_height + segment_margin) * -1
-            if event.key == pygame.K_DOWN:
-                x_change = 0
-                y_change = (segment_height + segment_margin)
-
-    # move snake one step
-    my_snake.move()
-    # -- Draw everything
-    # Clear screen
-    screen.fill(BLACK)
-    my_snake.spriteslist.draw(screen)
-    food.foodlist.draw(screen)
-
-    # Flip screen
-    pygame.display.flip()
-
-    # Pause
-    clock.tick(5) """
-
-pygame.quit()
+# pygame.quit()
