@@ -79,7 +79,7 @@ while carryOn:
         snake.set_x_change(snake_segment)
         snake.set_y_change(0)  
 
-    if(snake_counter == 4):
+    if(snake_counter == 2):
         snake.move()
         snake_counter = 0
     snake_counter = snake_counter + 1
@@ -99,6 +99,10 @@ while carryOn:
     # First, clear the screen to black. 
     if pygame.sprite.collide_mask(ball, paddleA):
         ball.bounce()
+
+    for segment in snake.segments:
+        if pygame.sprite.collide_mask(segment, ball):
+            ball.bounce()
 
     
     #Draw the net
