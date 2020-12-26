@@ -37,7 +37,7 @@ pijltjes op het toetsenbord
 
 ### pong paddle:
 
-z : naar boven
+z : naar boven </br>
 s : naar beneden
 
 ## Analyse probleem
