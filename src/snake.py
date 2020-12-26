@@ -30,7 +30,7 @@ class Snake():
     def __init__(self):
         self.segments = []
         self.spriteslist = pygame.sprite.Group()
-        for i in range(15):
+        for i in range(12):
             x = (segment_width) * 30 - (segment_width) * i
             y = (segment_height) * 2
             segment = Segment(x, y)
@@ -85,63 +85,9 @@ class Segment(pygame.sprite.Sprite):
 
         # Set height, width
         self.image = pygame.Surface([segment_width, segment_height])
-        self.image.fill(WHITE)
+        self.image.fill(GREEN)
 
         # Set top-left corner of the bounding rectangle to be the passed-in location.
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
-
-
-# # Call this function so the Pygame library can initialize itself
-# pygame.init()
-
-# # Create a 600x600 sized screen
-# screen = pygame.display.set_mode([width, height])
-
-# # Set the title of the window
-# pygame.display.set_caption('Snake Game')
-
-# # Create an initial snake
-# my_snake = Snake()
-
-# clock = pygame.time.Clock()
-# done = False
-
-# while not done:
-#     for event in pygame.event.get():
-#         if event.type == pygame.QUIT:
-#             done = True
-
-#         # Set the direction based on the key pressed
-#         # We want the speed to be enough that we move a full
-#         # segment, plus the margin.
-#         if event.type == pygame.KEYDOWN:
-#             if event.key == pygame.K_LEFT:
-#                 x_change = (segment_width) * -1
-#                 y_change = 0
-#             if event.key == pygame.K_RIGHT:
-#                 x_change = (segment_width)
-#                 y_change = 0
-#             if event.key == pygame.K_UP:
-#                 x_change = 0
-#                 y_change = (segment_height) * -1
-#             if event.key == pygame.K_DOWN:
-#                 x_change = 0
-#                 y_change = (segment_height)
-
-#     # move snake one step
-#     my_snake.move()
-#     # -- Draw everything
-#     # Clear screen
-#     screen.fill(BLACK)
-#     my_snake.spriteslist.draw(screen)
-    
-
-#     # Flip screen
-#     pygame.display.flip()
-
-#     # Pause
-#     clock.tick(10)
-
-# pygame.quit()

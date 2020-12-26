@@ -41,7 +41,7 @@ goal = Paddle(BLUE, 10, 500)
 goal.rect.x = 0
 goal.rect.y = 0
 
-ball = Ball(WHITE, 10, 10)
+ball = Ball(RED, 10, 10)
 ball.rect.x = 345
 ball.rect.y = 195
 
@@ -77,9 +77,9 @@ while carryOn:
     #Moving the paddles when the user uses the arrow keys (player A) or "W/S" keys (player B) 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_z]:
-        paddleA.moveUp(5)
+        paddleA.moveUp(7)
     if keys[pygame.K_s]:
-        paddleA.moveDown(5)
+        paddleA.moveDown(7)
     if keys[pygame.K_UP]:
         snake.set_x_change(0)
         snake.set_y_change(-snake_segment)  
