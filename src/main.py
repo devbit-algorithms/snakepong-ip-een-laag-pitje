@@ -37,15 +37,19 @@ paddleA = Paddle(WHITE, 10, 100)
 paddleA.rect.x = 20
 paddleA.rect.y = 200
 
-goal = Paddle(BLUE, 10, 500)
-goal.rect.x = 0
-goal.rect.y = 0
+goalA = Paddle(BLUE, 10, 500)
+goalA.rect.x = 0
+goalA.rect.y = 0
+
+goalB = Paddle(BLUE, 10, 500)
+goalB.rect.x = 690
+goalB.rect.y = 0
 
 ball = Ball(RED, 10, 10)
 ball.rect.x = 345
 ball.rect.y = 195
 
-snake = Snake()
+snake = Snake(score)
 segment = Segment(10 , 10)
 snake_segment = 10
 snake_counter = 0
@@ -56,13 +60,16 @@ all_sprites_list = pygame.sprite.Group()
 # Add thepaddles to the list of sprites
 all_sprites_list.add(paddleA)
 all_sprites_list.add(ball)
-all_sprites_list.add(goal)
+all_sprites_list.add(goalA)
+all_sprites_list.add(goalB)
 
 # The loop will carry on until the user exit the game (e.g. clicks the close button).
 carryOn = True
  
 # The clock will be used to control how fast the screen updates
 clock = pygame.time.Clock()
+ScorePlayerA = 0
+ScorePlayerB = 0
  
 # -------- Main Program Loop -----------
 while carryOn:
@@ -93,7 +100,7 @@ while carryOn:
         snake.set_x_change(snake_segment)
         snake.set_y_change(0)  
 
-    if(snake_counter == 2):
+    if(snake_counter == 1):
         snake.move()
         snake_counter = 0
     snake_counter = snake_counter + 1
@@ -118,12 +125,19 @@ while carryOn:
         if pygame.sprite.collide_mask(segment, ball):
             ball.bounce()
 
-    if pygame.sprite.collide_mask(ball, goal):
-        score = score + 1
+    if pygame.sprite.collide_mask(ball, goalA):
+        ScorePlayerA += 1
+        #snake = Snake(ScorePlayerA)
         ball.rect.x = randint(50,300)
         ball.rect.y = randint(50,250)
         ball.velocity[0] = -ball.velocity[0]
-        
+
+
+    if pygame.sprite.collide_mask(ball, goalB):
+        ScorePlayerB += 1
+        ball.rect.x = randint(50,300)
+        ball.rect.y = randint(50,250)
+        ball.velocity[0] = -ball.velocity[0]
 
 
 
@@ -136,7 +150,12 @@ while carryOn:
 
     #pygame.draw.line(screen, BLUE, [0, 0], [0,500], 15)
 
-    
+    font = pygame.font.Font(None, 74)
+    text = font.render(str(ScorePlayerA), 1, WHITE)
+    screen.blit(text, (250,10))
+    text = font.render(str(ScorePlayerB), 1, WHITE)
+    screen.blit(text, (420,10))
+
     # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()
      

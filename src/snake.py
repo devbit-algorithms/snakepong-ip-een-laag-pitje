@@ -10,7 +10,7 @@ GREEN = (0, 255, 0)
 
 # Screen size
 height = 500
-width = 700
+width = 690
 
 
 
@@ -27,10 +27,10 @@ class Snake():
     """ Class to represent one snake. """
 
     # Constructor
-    def __init__(self):
+    def __init__(self, score):
         self.segments = []
         self.spriteslist = pygame.sprite.Group()
-        for i in range(12):
+        for i in range(17 + score):
             x = (segment_width) * 30 - (segment_width) * i
             y = (segment_height) * 2
             segment = Segment(x, y)

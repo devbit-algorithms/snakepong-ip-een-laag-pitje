@@ -63,5 +63,4 @@ De pong paddle is vlot gemaakt met behulp van de spirit. deze moet enkel naar bo
 ##### controller:
 Deze functionaliteit zit verwerkt in de main file omdat het zeer makkelijk gaat om de controls binnen te halen met behulp van pygame
 
-
 ## Code schema
