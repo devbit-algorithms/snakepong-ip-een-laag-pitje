@@ -25,6 +25,7 @@ width= 700
 heigth = 500
 
 score = 0
+Snake_score = False
 
 
  
@@ -41,9 +42,9 @@ goalA = Paddle(BLUE, 10, 500)
 goalA.rect.x = 0
 goalA.rect.y = 0
 
-goalB = Paddle(BLUE, 10, 500)
-goalB.rect.x = 690
-goalB.rect.y = 0
+# goalB = Paddle(BLUE, 10, 500)
+# goalB.rect.x = 690
+# goalB.rect.y = 0
 
 ball = Ball(RED, 10, 10)
 ball.rect.x = 345
@@ -61,7 +62,7 @@ all_sprites_list = pygame.sprite.Group()
 all_sprites_list.add(paddleA)
 all_sprites_list.add(ball)
 all_sprites_list.add(goalA)
-all_sprites_list.add(goalB)
+#all_sprites_list.add(goalB)
 
 # The loop will carry on until the user exit the game (e.g. clicks the close button).
 carryOn = True
@@ -100,7 +101,7 @@ while carryOn:
         snake.set_x_change(snake_segment)
         snake.set_y_change(0)  
 
-    if(snake_counter == 1):
+    if(snake_counter == 2):
         snake.move()
         snake_counter = 0
     snake_counter = snake_counter + 1
@@ -132,14 +133,9 @@ while carryOn:
         ball.rect.y = randint(50,250)
         ball.velocity[0] = -ball.velocity[0]
 
-
-    if pygame.sprite.collide_mask(ball, goalB):
+    if(snake.segments[0].rect.x >= 690 or snake.segments[0].rect.x <= 0 or snake.segments[0].rect.y > 480 or snake.segments[0].rect.x < 10):
         ScorePlayerB += 1
-        ball.rect.x = randint(50,300)
-        ball.rect.y = randint(50,250)
-        ball.velocity[0] = -ball.velocity[0]
-
-
+        snake = Snake(ScorePlayerA)
 
     #Draw the net
     screen.fill(BLACK)

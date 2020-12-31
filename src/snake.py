@@ -10,9 +10,7 @@ GREEN = (0, 255, 0)
 
 # Screen size
 height = 500
-width = 690
-
-
+width = 700
 
 # Set the width and height of each snake segment
 segment_width = 10#min(height, width) / 40
@@ -68,11 +66,6 @@ class Snake():
         # .pop() command removes last item in list
             old_segment = self.segments.pop()
             self.spriteslist.remove(old_segment)
-
-
-
-
-
 
 
 class Segment(pygame.sprite.Sprite):
