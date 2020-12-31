@@ -64,4 +64,4 @@ De pong paddle is vlot gemaakt met behulp van de spirit. deze moet enkel naar bo
 Deze functionaliteit zit verwerkt in de main file omdat het zeer makkelijk gaat om de controls binnen te halen met behulp van pygame
 
 ## Code schema
-![demo snakepong](img/schema.jpg?raw=true "code schematic")
+![demo snakepong](img/schema.png?raw=true "code schematic")
